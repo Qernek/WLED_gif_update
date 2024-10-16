@@ -10,6 +10,17 @@
  * \/ \/ \/
  */
 //#include "../usermods/EXAMPLE_v2/usermod_v2_example.h"
+#ifdef PIXELART_CLIENT_ENABLED
+  #if defined(ESP8266)
+  #include <ESP8266WiFi.h>        // Include the Wi-Fi library
+  #include <ESP8266HTTPClient.h>
+  #else
+  #include <WiFi.h>
+  #include <HTTPClient.h>
+  #endif
+  #include <WiFiUdp.h>
+  #include "../usermods/pixelart_client/usermod_pixelart_client.cpp"
+#endif
 
 #ifdef USERMOD_BATTERY
   #include "../usermods/Battery/usermod_v2_Battery.h"
@@ -246,7 +257,10 @@ void registerUsermods()
    * \/ \/ \/
    */
   //usermods.add(new MyExampleUsermod());
-
+  #ifdef PIXELART_CLIENT_ENABLED
+  usermods.add(new PixelArtClient());
+  #endif
+  
   #ifdef USERMOD_BATTERY
   usermods.add(new UsermodBattery());
   #endif
