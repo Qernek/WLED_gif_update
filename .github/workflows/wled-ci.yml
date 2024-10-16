@@ -78,8 +78,6 @@ jobs:
         files: |
           *.bin
           *.bin.gz
-
-
   testCdata:
     name: Test cdata.js
     runs-on: ubuntu-latest
